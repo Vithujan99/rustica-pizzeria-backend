@@ -78,7 +78,7 @@ router.get("/admin/orders", verifyJWT, async (req, res) => {
     try {
       const adminOrder = schemas.AdminOrder;
       const allOrder = await adminOrder.find({}).exec();
-      res.send({ auth: true, allOrder: allOrder });
+      res.json({ auth: true, allOrder: allOrder });
     } catch (err) {
       res.status(500).json(err);
     }
@@ -93,7 +93,7 @@ router.delete("/admin/orders/:id", verifyJWT, async (req, res) => {
       const adminOrder = schemas.AdminOrder;
       await adminOrder.deleteOne({ _id: id });
       const answer = "Sucessfully Deleted _id: " + id;
-      res.send(answer);
+      res.json({ auth: true, message: answer });
     } catch (err) {
       res.status(500).json(err);
     }
@@ -153,7 +153,7 @@ router.get("/orders", verifyJWT, async (req, res) => {
     try {
       const order = schemas.Order;
       const allOrder = await order.find({}).exec();
-      res.send({ role: req.user.role, auth: true, allOrder: allOrder });
+      res.json({ role: req.user.role, auth: true, allOrder: allOrder });
     } catch (err) {
       res.status(500).json(err);
     }
@@ -169,7 +169,7 @@ router.delete("/orders/:id", verifyJWT, async (req, res) => {
       const order = schemas.Order;
       await order.deleteOne({ _id: id });
       const answer = "Sucessfully Deleted _id: " + id;
-      res.send(answer);
+      res.json({ auth: true, message: answer });
     } catch (err) {
       res.status(500).json(err);
     }

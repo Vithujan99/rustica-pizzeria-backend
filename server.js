@@ -189,6 +189,7 @@ app.post("/my-server/capture-paypal-order", async (req, res) => {
 //End of Paypall
 
 //Catch-all server route
+const path = require("path");
 app.get("/*", function (req, res) {
   res.sendFile(path.join(__dirname, "dist/index.html"), function (err) {
     if (err) {
